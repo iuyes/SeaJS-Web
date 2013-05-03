@@ -4,7 +4,7 @@
  * Date: 13-4-7
  * Time: 下午4:56
  * 静态服务器无文件缓存版
- *
+ * 参考了朴灵CNode的静态服务器代码
  */
 
 var http = require('http')
@@ -16,28 +16,6 @@ var http = require('http')
     , zlib = require('zlib')
     , PORT = config.PORT;
 
-/** GET请求 */
-function getReq(req, res) {
-    res.setHeader('Content-Type', 'application/json');
-    res.write('{"name" : "Ni", "age" : 23 }');
-    res.end();
-}
-
-/** POST请求 */
-function postReq(req, res) {
-    var data = '';
-    req.on('data', function(chunk) {
-        data += chunk;
-    });
-
-    req.on('end', function() {
-        console.log(data);
-        res.setHeader('Content-Type', 'application/json');
-        res.write(data);
-        res.end();
-    });
-}
-
 var app = http.createServer(function (req, res) {
     res.setHeader('Server', 'Node/Thorns');
     var pathName = url.parse(req.url).pathname;
@@ -46,23 +24,12 @@ var app = http.createServer(function (req, res) {
     var stream = fs.createWriteStream(__dirname + "/log.txt", {encoding: 'utf8', flags:'a'});
     stream.write(logTxt + '\r\n');
 
-    /** 路由判断  */
-    switch(pathName) {
-        case '/json':
-            getReq(req, res);
-            return;
-        case  '/post':
-            postReq(req, res);
-            return;
-        case '/':
-            pathName += config.Welcome.file;
-            break;
-    }
 /*
     if (pathName.slice(-1) === '/') {
         pathName += config.Welcome.file;
     }
 */
+
     var realPath = path.join('public', path.normalize(pathName.replace(/\.\./g, ''))); //防止'../'用户使用url访问服务端代码
 
     var handle = function (realPath) {
