@@ -6,16 +6,13 @@
  */
 
 define(function (require, exports, modules) {
-    var $ = require('jquery')
-        , _ = require('underscore')
-        , WebDb = require('./../webdb/db').WebDb     //载入web database 类库
+    var _ = require('underscore')
         , Backbone = require('backbone')
-        , SiteInfo = require('../model/site-model')
         , Handlebars = require('handlebars');
 
     var SiteList = Backbone.Collection.extend({
-        model : SiteInfo,   //指定控制器的数据模型
-        webdb : 'webSql',
+        model : SiteInfo,                              //指定控制器的数据模型
+        webdb : 'webSql',                              //启动自定义Backbone.sync 开关
         initialize : function (models, options) {}
     });
 
