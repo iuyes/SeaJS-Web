@@ -11,5 +11,9 @@ WebSQL
 
 3. BackboneJS 前端MVC开发模式
 
+4. NodeJS作为后端的静态资源服务器
+
 *****
+因为例子中运用到模版加载tpl，所以需要后端服务器支持，node server即可
+
 个人学习专用
