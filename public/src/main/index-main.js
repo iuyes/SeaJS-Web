@@ -6,18 +6,16 @@
  */
 
 define(function (require, exports, modules) {
-    var $ = jQuery = require('jquery')
-        , FromView = require('../view/from-view')
-        , SearchView = require('../view/search-view')
-        , ListView = require('../view/list-view');
-
     require('../webdb/backbone-webdbsync');
     require('bootstrap');
     require('datetimepicker');
+    
+    var FromView = require('../view/from-view')
+        , ListView = require('../view/list-view');
 
     var fromView = new FromView;
-    var searchView = new SearchView;
     var listView = new ListView;
+    
     fromView.render();
     listView.render();
 
