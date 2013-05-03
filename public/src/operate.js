@@ -3,6 +3,7 @@
  * Date: 13-3-27
  * Time: 上午10:29
  * web sql 表单业务逻辑
+ * 文件代码无效 这段代码为非Backbone开发
  */
 define(function (require, exports, modules) {
     var $ = require('jquery')
