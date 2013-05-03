@@ -1,4 +1,8 @@
-exports.types =  {
+/**
+ * mime文件格式 
+ */
+
+modules.exports =  {
     "css": "text/css",
     "gif": "image/gif",
     "html": "text/html",
