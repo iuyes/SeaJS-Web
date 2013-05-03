@@ -1,0 +1,37 @@
+@charset "utf-8";
+/** 表单页样式 */
+
+body {
+    padding-top: 60px;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+}
+
+#setdate{
+    display: block;
+}
+
+#unit{
+    display: none;
+}
+
+.controls span {
+    padding-left: 15px;
+    display: inline-block;
+    background-position: 0px 3px;
+}
+
+    .self-error {
+        background: url("../assets/images/error.png") no-repeat;
+        color: #b94a48;
+    }
+
+    .self-ok {
+        background: url("../assets/images/ok.png") no-repeat;
+        color: #000000;
+    }
+	#sitetype-help {
+	    margin-left: 72px;
+	}

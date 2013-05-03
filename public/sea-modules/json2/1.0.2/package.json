@@ -1,0 +1,26 @@
+{
+    "name": "json2",
+    "version": "1.0.2",
+    "root": "#",
+    "description": "json2，字符串转json，json转字符串",
+    "keywords":["公共模块", "json2"],
+    "homepage": "https://github.com/SamuraiJack/JSON2",
+    "author": "",
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "bugs": {
+        "url": ""
+    },
+    "license": "",
+    "dependencies": {
+    },
+    "tests": ["json2"],
+    "output": {
+        "json2.js": "."
+    },
+    "assets":null,
+    "options": null,
+    "optionalDependencies": null
+}
