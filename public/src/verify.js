@@ -4,6 +4,7 @@
  * Date: 13-3-7
  * Time: 上午10:39
  * 表单验证模块
+ * 文件无效
  */
 define(function (require, exports, modules) {
     var $ = require('jquery');
