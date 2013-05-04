@@ -6,7 +6,7 @@
  * 搜索站点信息 searchView
  */
 
-define(function(require, exports, modules) {
+define(function(require, exports, module) {
     var $ = require('jquery')
         , _ = require('underscore')
         , Backbone = require('backbone')
@@ -34,5 +34,5 @@ define(function(require, exports, modules) {
         }
     });
 
-    modules.exports = SearchView;
+    module.exports = SearchView;
 });
