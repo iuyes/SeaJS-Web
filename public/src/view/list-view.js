@@ -5,7 +5,7 @@
  * 列表视图
  */
 
-define(function(require, exports, modules) {
+define(function(require, exports, module) {
 
     var $ = require('jquery')
         , Backbone = require('backbone')
@@ -64,5 +64,5 @@ define(function(require, exports, modules) {
         }
     });
 
-    modules.exports = ListView;
+    module.exports = ListView;
 });
