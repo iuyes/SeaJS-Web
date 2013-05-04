@@ -4,7 +4,7 @@
  * Time: 下午11:10
  * Web SQL Database 操作类库
  */
-define(function (require, exports, modules) {
+define(function (require, exports, module) {
     var _ = require('underscore');
 
     //WebDb构造函数
@@ -139,6 +139,6 @@ define(function (require, exports, modules) {
         }
     }
 
-    modules.exports = WebDb;
+    module.exports = WebDb;
 
 });

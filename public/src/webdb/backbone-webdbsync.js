@@ -9,7 +9,7 @@
  * PS:不进行任何的DOM和数据模型、集合操作
  */
 
-define(function(require, exports, modules) {
+define(function(require, exports, module) {
 
     var _ = require('underscore')
         , Backbone = require('backbone')

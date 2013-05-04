@@ -8,7 +8,8 @@
 define(function (require, exports, module) {
     var _ = require('underscore')
         , Backbone = require('backbone')
-        , Handlebars = require('handlebars');
+        , Handlebars = require('handlebars')
+        , SiteInfo = require('./site-model');
 
     var SiteList = Backbone.Collection.extend({
         model : SiteInfo,                              //指定控制器的数据模型

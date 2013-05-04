@@ -6,7 +6,7 @@
  * test backboneJS
  */
 
-define(function(require, exports, modules) {
+define(function(require, exports, module) {
 
     var $ = require('jquery')
         , Handlebars = require('handlebars');

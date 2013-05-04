@@ -5,7 +5,7 @@
  * 站点信息集合 SiteInfo ---> Model
  */
 
-define(function (require, exports, modules) {
+define(function (require, exports, module) {
     var $ = require('jquery')
         , _ = require('underscore')
         , observer = require('observer')
@@ -167,5 +167,5 @@ define(function (require, exports, modules) {
         }
     });
 
-    modules.exports = SiteInfo;
+    module.exports = SiteInfo;
 });

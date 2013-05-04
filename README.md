@@ -1,7 +1,9 @@
 WebSQL
 ======
 
-`NodeJS 搭建静态服务器 + WebSql Database数据存储 + BackboneJS + SeaJS`
+>
+NodeJS 搭建静态服务器 + WebSql Database数据存储 + BackboneJS + SeaJS
+
 
 ## 说明  ##
 
@@ -14,6 +16,6 @@ WebSQL
 4. NodeJS作为后端的静态资源服务器
 
 *****
-因为例子中运用到模版加载tpl，所以需要后端服务器支持，node server即可
+例子中运用到模版加载tpl，采用NodeJS作为后端服务器，实现全应用JS化开发
 
-个人学习专用
+前后端JS学习实例

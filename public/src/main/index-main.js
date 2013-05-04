@@ -16,7 +16,7 @@ define(function (require, exports, module) {
     var fromView = new FromView;
     var listView = new ListView;
     
-    fromView.render();
-    listView.render();
+    fromView.render();        //添加站点视图渲染
+    listView.render();        //显示列表视图渲染
 
 });
