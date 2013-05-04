@@ -5,7 +5,7 @@
  * 表单操作视图
  */
 
-define(function(require, exports, modules) {
+define(function(require, exports, module) {
     var _ = require('underscore')
         , $ = require('jquery')
         , Handlebars = require('handlebars')
@@ -156,5 +156,5 @@ define(function(require, exports, modules) {
         }
     });
 
-    modules.exports = FromView;
+    module.exports = FromView;
 });
