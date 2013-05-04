@@ -5,7 +5,7 @@
  * Web SQL Database 操作业务调度模块
  */
 
-define(function (require, exports, modules) {
+define(function (require, exports, module) {
     require('../webdb/backbone-webdbsync');
     require('bootstrap');
     require('datetimepicker');
