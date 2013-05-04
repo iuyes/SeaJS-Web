@@ -5,7 +5,7 @@
  * 站点信息集合 SiteList ---> Collection
  */
 
-define(function (require, exports, modules) {
+define(function (require, exports, module) {
     var _ = require('underscore')
         , Backbone = require('backbone')
         , Handlebars = require('handlebars');
@@ -16,5 +16,5 @@ define(function (require, exports, modules) {
         initialize : function (models, options) {}
     });
 
-    modules.exports = SiteList;
+    module.exports = SiteList;
 });
