@@ -2,7 +2,7 @@
  * mime文件格式 
  */
 
-modules.exports =  {
+module.exports =  {
     "css": "text/css",
     "gif": "image/gif",
     "html": "text/html",
