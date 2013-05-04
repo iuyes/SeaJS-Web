@@ -1,0 +1,33 @@
+{
+    "name": "WebSQL",
+    "version": "0.1.0",
+    "root": "#",
+    "description": "",
+    "keywords":["WebSQL", "前端MVC"],
+    "homepage": "",
+    "author": "Nightink",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Nightink/WebSQL"
+    },
+    "bugs": {
+        "url": "https://github.com/Nightink/WebSQL/issues"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "jquery": "1.8.2",
+        "backbone": "1.0.0",
+        "observer": "1.0.0",
+        "underscore": "1.4.4",
+        "handlebars": "1.1.0",
+        "bootstrap": "2.2.2",
+        "json2": "1.0.2"
+    },
+    "tests": ["tests"],
+    "output": {
+    },
+    "assets": {
+        "assets/images": "assets/images/*.*"
+    },
+    "options": null
+}
