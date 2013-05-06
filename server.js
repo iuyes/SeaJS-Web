@@ -24,12 +24,6 @@ var app = http.createServer(function (req, res) {
     var stream = fs.createWriteStream(__dirname + "/log.txt", {encoding: 'utf8', flags:'a'});
     stream.write(logTxt + '\r\n');
 
-/*
-    if (pathName.slice(-1) === '/') {
-        pathName += config.Welcome.file;
-    }
-*/
-
     var realPath = path.join('public', path.normalize(pathName.replace(/\.\./g, ''))); //防止'../'用户使用url访问服务端代码
 
     var handle = function (realPath) {
@@ -40,7 +34,7 @@ var app = http.createServer(function (req, res) {
                 res.end();
             } else {
                 if (data.isDirectory()) {    //判断data是为一个目录
-                    realPath = path.join(pathName, config.Welcome.file);    //载入目录下index文件
+                    realPath = path.join(realPath, config.Welcome.file);    //载入目录下index文件
                     handle(realPath);
                 } else {
                     var ext = path.extname(realPath);
