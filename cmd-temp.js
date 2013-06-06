@@ -1,5 +1,6 @@
 /***
  * CommondJS 模版文件
+ * NodeJS、CommonJS，浏览器通用定义模块
  */
 
 ;(function(name, definition) {
