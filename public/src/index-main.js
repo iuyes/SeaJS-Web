@@ -6,15 +6,16 @@
  */
 
 define(function (require, exports, module) {
-    require('../webdb/backbone-webdbsync');
+    require('./webdb/backbone-webdbsync');
     require('bootstrap');
     require('datetimepicker');
+    require('../css/index.css');
     
-    var FromView = require('../view/from-view')
-        , ListView = require('../view/list-view');
+    var FromView = require('./view/from-view')
+        , ListView = require('./view/list-view');
 
-    var fromView = new FromView;
-    var listView = new ListView;
+    var fromView = new FromView();
+    var listView = new ListView();
     
     fromView.render();        //添加站点视图渲染
     listView.render();        //显示列表视图渲染

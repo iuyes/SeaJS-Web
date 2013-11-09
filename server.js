@@ -1,6 +1,5 @@
 /**
- * Created with JetBrains WebStorm.
- * User: chc
+ * User: Nightink
  * Date: 13-4-7
  * Time: 下午4:56
  * 静态服务器无文件缓存版
@@ -21,26 +20,37 @@ var app = http.createServer(function (req, res) {
     var pathName = url.parse(req.url).pathname;
     var logTxt = req.connection.remoteAddress + ' : ' + pathName;
 
-    var stream = fs.createWriteStream(__dirname + "/log.txt", {encoding: 'utf8', flags:'a'});
+    var stream = fs.createWriteStream(__dirname + "/log.txt", {
+        encoding: 'utf8', 
+        flags:'a'
+    });
+
     stream.write(logTxt + '\r\n');
 
-    var realPath = path.join('public', path.normalize(pathName.replace(/\.\./g, ''))); //防止'../'用户使用url访问服务端代码
+    // 防止'../'用户使用url访问服务端代码
+    var realPath = path.join('public', path.normalize(pathName.replace(/\.\./g, '')));
 
     var handle = function (realPath) {
         fs.stat(realPath, function (err, data) {
+
             if (err) {
-                res.writeHead(404, 'Not Found', {'Content-Type':'text/plain;charset=utf-8'});
+                res.writeHead(404, 'Not Found', { 'Content-Type':'text/plain;charset=utf-8' });
                 res.write('请求路径' + pathName + '不存在');
                 res.end();
             } else {
-                if (data.isDirectory()) {    //判断data是为一个目录
-                    realPath = path.join(realPath, config.Welcome.file);    //载入目录下index文件
+
+                // 判断data是为一个目录
+                if (data.isDirectory()) {
+
+                    // 载入目录下index文件
+                    realPath = path.join(realPath, config.Welcome.file);
                     handle(realPath);
                 } else {
                     var ext = path.extname(realPath);
                     ext = ext ? ext.slice(1) : 'unknown';
                     var contentType = mime[ext] || 'text/plain';
-                    res.setHeader('Content-Type', contentType + ';charset=utf-8'); //设置文件后缀名相对应的mime格式
+                    // 设置文件后缀名相对应的mime格式
+                    res.setHeader('Content-Type', contentType + ';charset=utf-8');
 
                     var lastModified = data.mtime.toUTCString();
                     res.setHeader('Last-Modified', lastModified);

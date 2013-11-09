@@ -23,4 +23,4 @@ seajs.config({
     , preload:['jquery', 'plugin-text']
 });
 
-seajs.use('/src/main/index-main');
+seajs.use('/src/index-main');

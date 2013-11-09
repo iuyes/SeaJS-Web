@@ -1,5 +1,5 @@
 /**
- * User: chc
+ * User: Nightink
  * Date: 13-4-10
  * Time: 上午8:20
  *
@@ -14,24 +14,26 @@ define(function(require, exports, module) {
     var _ = require('underscore')
         , Backbone = require('backbone')
         , WebDb = require('./db')
-        , db = new WebDb("test", "1.0", "chc", 2 * 1024 * 1024);
+        , db = new WebDb('test', '1.0', 'Nightink', 2 * 1024 * 1024);
 
-    //创建表结构
+    var console = window.console;
+
+    // 创建表结构
     db.createTable('webSql', {
-        "id":           "INTEGER PRIMARY KEY",
-        "site":         "VARCHAR(20) NOT NULL",
-        "sid":          "VARCHAR(8) NOT NULL",
-        "longitude":    "VARCHAR(10) NOT NULL",
-        "latitude":     "VARCHAR(10) NOT NULL",
-        "elements":     "VARCHAR(8) NOT NULL",
-        "sitetype":     "VARCHAR(8) NOT NULL",
-        "sunit":        "VARCHAR(20) NOT NULL",
-        "sitedate":     "VARCHAR(12) NOT NULL",
-        "remark":       "TEXT NOT NULL"
+        'id':           'INTEGER PRIMARY KEY',
+        'site':         'VARCHAR(20) NOT NULL',
+        'sid':          'VARCHAR(8) NOT NULL',
+        'longitude':    'VARCHAR(10) NOT NULL',
+        'latitude':     'VARCHAR(10) NOT NULL',
+        'elements':     'VARCHAR(8) NOT NULL',
+        'sitetype':     'VARCHAR(8) NOT NULL',
+        'sunit':        'VARCHAR(20) NOT NULL',
+        'sitedate':     'VARCHAR(12) NOT NULL',
+        'remark':       'TEXT NOT NULL'
     });
 
     Backbone.WebDbSync = function(method, model, options) {
-        //负责显示数据
+        // 负责显示数据
         var selectDb = function(tx, results) {
             var len = results.rows.length, i = 0, list = [];
             for (; i < len; i++) {
@@ -74,18 +76,18 @@ define(function(require, exports, module) {
         }
     };
 
-    //设置原生sync缓存变量
+    // 设置原生sync缓存变量
     Backbone.ajaxSync = Backbone.sync;
 
     Backbone.getSyncMethod = function(model) {
         if(model.webdb) {
             return Backbone.WebDbSync;
         }
-        //非webdb操作调用ajax的sync
+        // 非webdb操作调用ajax的sync
         return Backbone.ajaxSync;
     };
 
-    //重载sync
+    // 重载sync
     Backbone.sync = function(method, model, options) {
         return Backbone.getSyncMethod(model).call(this, method, model, options);
     };

@@ -1,5 +1,5 @@
 /**
- * User: chc
+ * User: Nightink
  * Date: 13-4-7
  * Time: 下午5:01
  * 表单操作视图
@@ -13,16 +13,22 @@ define(function(require, exports, module) {
         , SiteInfo = require('../model/site-model')
         , observer = require('observer');
 
-    var FromView = Backbone.View.extend({   //web sql调度接口
-        el: $('#web-sql'),   //用于事件绑定的容器
-        template: Handlebars.compile(require('../tpl/from.tpl')),   //载入模版文件
+    var alert = window.alert;
+
+    //web sql调度接口
+    var FromView = Backbone.View.extend({
+        // 用于事件绑定的容器
+        el: $('#web-sql'),
+        // 载入模版文件
+        template: Handlebars.compile(require('../tpl/from.tpl')),
         initialize: function() {
-            this.model = new SiteInfo;
+            this.model = new SiteInfo();
 
             observer.on('verify:msg', this.tipMsg, this);
             observer.on('model:edit', this.modelEdit, this);
         },
-        events: {       //web页面事件触发注册
+        // web页面事件触发注册
+        events: {
             'blur #site': 'valueSet',
             'blur #sid': 'valueSet',
             'blur #latitude': 'valueSet',
@@ -35,7 +41,9 @@ define(function(require, exports, module) {
             'keyup #remark': 'valueSet',
             'click #add': 'addSite'
         },
-        valueSet: function(e) {     //统一事件值获取
+
+        // 统一事件值获取
+        valueSet: function(e) {
             var $dom = $(e.target)
                 , str = $.trim($dom.val())
                 , name = $dom.attr('name');
@@ -58,16 +66,18 @@ define(function(require, exports, module) {
             this.$('input[name="elements"]:checked').each(function() {
                 choice.push($(this).val());
             });
-            var elements = choice.join(':');  //将数组转化成字符串
+
+            // 将数组转化成字符串
+            var elements = choice.join(':');
             this.model.set({elements: elements}, {validate: true});
         },
         sitetypeSet: function(e) {
-            var sitetype = this.$("input[name=site-type]:checked").val();
+            var sitetype = this.$('input[name=site-type]:checked').val();
             this.model.set({sitetype: sitetype}, {validate: true});
         },
         sunitSet: function(str) {
             var $unit = this.$('#unit');
-            if(str == '0') {
+            if(str === '0') {
                 $unit.show();
                 return;
             }
@@ -85,17 +95,19 @@ define(function(require, exports, module) {
         remarkSet: function(str) {
             this.model.set({remark: str}, {validate: true});
         },
-        tipMsg: function(data) {		//验证信息DOM显示
+        // 验证信息DOM显示
+        tipMsg: function(data) {
             if(data.flag) {
                 this.$('#' + data.tagName + '-help').html(data.tipStr).attr('class', 'self-ok');
             } else {
                 this.$('#' + data.tagName + '-help').html(data.tipStr).attr('class', 'self-error');
             }
         },
-        success: function(model, str) {		//sync success 事件监听回调函数
+        // sync success 事件监听回调函数
+        success: function(model, str) {
             observer.trigger('add');
             alert(str);
-            this.model = new SiteInfo;
+            this.model = new SiteInfo();
             this.render();
         },
         render: function() {
@@ -107,27 +119,37 @@ define(function(require, exports, module) {
             this.$el.html(content);
             this.renderDom(data);
 
-            this.$('#setdate').datetimepicker({     //时间控件调用
+            // 时间控件调用
+            this.$('#setdate').datetimepicker({
                 pickTime: false
             });
         },
-        renderDom: function(data) {         //针对页面无法用模版进行渲染的DOM元素进行单独渲染
-            this.$("input[name='site-type'][value='"+ data.sitetype +"']").attr("checked", true);   //渲染站点类型
-			
-            if(data.elements) {			//渲染检测要素
-                _.each(data.elements.split(":"), function(val) {
-                    $("input[name='elements'][value='"+ val +"']").attr("checked", true); 
+        // 针对页面无法用模版进行渲染的DOM元素进行单独渲染
+        renderDom: function(data) {
+
+            // 渲染站点类型
+            this.$('input[name="site-type"][value="'+ data.sitetype +'"]').attr('checked', true);
+
+            // 渲染检测要素
+            if(data.elements) {
+                _.each(data.elements.split(':'), function(val) {
+                    $('input[name="elements"][value="'+ val +'"]').attr('checked', true); 
                 })
             }
-            //针对站点单位进行渲染
+            // 针对站点单位进行渲染
             var value = data.sunit
                 , unit = this.$('#unit')
                 , $sunit = this.$('#sunit')
-                , unitStatus = false;       //下拉遍历状态
+                // 下拉遍历状态
+                , unitStatus = false;
 
-            if(!$.trim(value)) return;  //数据为空，不操作
+            // 数据为空，不操作
+            if(!$.trim(value)) {
+                return;
+            }
+
             $sunit.find('option').each(function(){
-                if($(this).val() == value){
+                if($(this).val() === value){
                     unitStatus = true;
                     $('#sunit').val(value);
                     unit.hide();
@@ -140,7 +162,7 @@ define(function(require, exports, module) {
         },
         addSite: function() {
             var sunit = this.$('#sunit').val();
-            if(sunit == '0') {
+            if(sunit === '0') {
                 var str = this.$('#unit').val();
                 this.model.set({sunit: str}, {validate: true});
             } else {

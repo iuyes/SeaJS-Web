@@ -1,6 +1,5 @@
 /**
- * Created with JetBrains WebStorm.
- * User: Eyes
+ * User: Nightink
  * Date: 13-4-7
  * Time: 下午10:12
  * 搜索站点信息 searchView

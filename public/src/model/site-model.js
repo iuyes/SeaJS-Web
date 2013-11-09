@@ -1,5 +1,5 @@
 /**
- * User: Eyes
+ * User: Nightink
  * Date: 13-4-7
  * Time: 下午10:12
  * 站点信息集合 SiteInfo ---> Model
@@ -13,16 +13,16 @@ define(function (require, exports, module) {
 
     var SiteInfo = Backbone.Model.extend({
         defaults : {
-            "id": null,
-            "site": '',
-            "sid": null,
-            "longitude": null,
-            "latitude": null,
-            "elements": null,
-            "sitetype": null,
-            "sunit": null,
-            "sitedate": null,
-            "remark": ''
+            id: null,
+            site: '',
+            sid: null,
+            longitude: null,
+            latitude: null,
+            elements: null,
+            sitetype: null,
+            sunit: null,
+            sitedate: null,
+            remark: ''
         },
         webdb : 'webSql',
         initialize : function (model, options) {
@@ -54,7 +54,9 @@ define(function (require, exports, module) {
             }
             , flag = false;
             for(var name in attrs) {
-                if(name === 'id') continue;
+                if(name === 'id') {
+                    continue;
+                }
 
                 tipData.tagName = name;
 
@@ -62,13 +64,15 @@ define(function (require, exports, module) {
                 tipData = this[name + 'Verify'](val, tipData);
                 observer.trigger('verify:msg', tipData);
 
-                if(!tipData.flag) flag = true;
+                if(!tipData.flag) {
+                    flag = true;
+                }
             }
             return flag;
         },
         siteVerify: function(str, data) {
             var i=0, strLen = 0 , len = str.length || 0 ;
-            if(len == 0 ) {
+            if(len === 0 ) {
                 data.tipStr = '数据不为空';
                 data.flag = false;
                 return data;
@@ -135,7 +139,7 @@ define(function (require, exports, module) {
             return data.flag = true, data;
         },
         sitedateVerify: function(str, data) {
-            if(str == null) {
+            if(str === null) {
                 data.tipStr = '时间不能为空';
                 data.flag = false;
             } else {
@@ -145,7 +149,7 @@ define(function (require, exports, module) {
             return data;
         },
         sitetypeVerify: function(str, data) {
-            if(str == null) {
+            if(str === null) {
                 data.tipStr = '至少选择一项';
                 data.flag = false;
             } else {

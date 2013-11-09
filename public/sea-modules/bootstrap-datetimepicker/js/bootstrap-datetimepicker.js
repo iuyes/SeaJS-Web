@@ -25,6 +25,7 @@
  */
 define(function(require, exports, module) {
     var $ = jQuery = require('jquery');
+    require('../css/bootstrap-datetimepicker.min.css');
 
 (function($) {
     var smartPhone = window.orientation != undefined;

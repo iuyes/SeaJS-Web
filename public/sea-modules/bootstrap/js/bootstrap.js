@@ -19,6 +19,7 @@
 define(function(require, exports, module) {
 
     var $ = jQuery = require('jquery');
+    require('../css/bootstrap.css');
 
 !function ($) {
 

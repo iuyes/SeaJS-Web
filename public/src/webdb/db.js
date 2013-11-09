@@ -1,11 +1,14 @@
-﻿/**
- * User: chc
+/**
+ * User: Nightink
  * Date: 13-3-6
  * Time: 下午11:10
  * Web SQL Database 操作类库
  */
 define(function (require, exports, module) {
+
     var _ = require('underscore');
+    var alert = window.alert;
+    var console = window.console;
 
     //WebDb构造函数
     function WebDb(dbName, version, displayName, maxSize) {
@@ -26,7 +29,7 @@ define(function (require, exports, module) {
                 }
             }
         } catch (e) {
-            if (e == 2) {
+            if (e === 2) {
                 console.log('无效数据库版本');
             } else {
                 console.log('未知错误 ' + e + '。');
@@ -44,7 +47,7 @@ define(function (require, exports, module) {
             }
             successFn = successFn || function () {
                 //设置sql操作成功处理函数
-                console.log("SQL Query Succeeded");
+                console.log('SQL Query Succeeded');
             };
 
             errorFn = errorFn || function (transaction, error) {
@@ -75,15 +78,15 @@ define(function (require, exports, module) {
             var self = this, sql = 'SELECT * FROM ' + table + ' LIMIT ' + index + ',' + page;
             self.exec(sql, [], successFn);
         },
-        //数据库插入操作
+        // 数据库插入操作
         insert:function (table, tableObj, successFn) {
             var self = this, sql = '',
                 name, nameArr = [], valueArr = [];
             for (name in tableObj) {
                 nameArr.push(name);
-                //针对参数为字符串进行追加单引号操作
+                // 针对参数为字符串进行追加单引号操作
                 if (_.isString(tableObj[name])) {
-                    valueArr.push("'" + tableObj[name] + "'");
+                    valueArr.push('\'' + tableObj[name] + '\'');
                 } else {
                     valueArr.push(tableObj[name]);
                 }
@@ -99,17 +102,19 @@ define(function (require, exports, module) {
 
             for (var name in tableObj) {
                 if (_.isString(tableObj[name])) {
-                    sql += name + " = '" + tableObj[name] + "'";
+                    sql += name + ' = \'' + tableObj[name] + '\'';
                 } else {
                     sql += name + ' = ' + tableObj[name];
                 }
                 sql += ', ';
             }
-            sql = sql.slice(0, -2); //过滤最后两个字符', '
+            // 过滤最后两个字符', '
+            sql = sql.slice(0, -2);
             if (_.isObject(falg)) {
                 sql += ' WHERE ';
                 for (var k in falg) {
-                    sql += k + '=' + falg[k] + 'OR';	//默认where 为 或操作 需重写此方法
+                    // 默认where 为 或操作 需重写此方法
+                    sql += k + '=' + falg[k] + 'OR';
                 }
                 sql = sql.slice(0, -2);
             }
@@ -119,19 +124,19 @@ define(function (require, exports, module) {
             var sql = 'DELETE FROM ' + table + ' WHERE id = ' + id + ';';
             this.exec(sql, successFn);
         },
-        //获得表数据个数
+        // 获得表数据个数
         count:function (table, countFn) {
             var sql = 'SELECT count(*) FROM ' + table;
             this.exec(sql, countFn);
         },
-        //like操作
+        // like操作
         like:function (table, tableObj, successFn, index, page) {
             index = index || 0;
             page = page || 5;
 
             var sql = 'SELECT * FROM ' + table + ' WHERE ';
             for (var name in tableObj) {
-                sql += name + " like '%" + tableObj[name] + "%' OR";
+                sql += name + ' like \'%' + tableObj[name] + '%\' OR';
             }
             sql = sql.slice(0, -2);
             sql += ' LIMIT ' + index + ',' + page;
