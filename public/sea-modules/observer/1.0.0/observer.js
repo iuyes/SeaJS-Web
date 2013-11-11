@@ -1,44 +1,68 @@
 define(function(require, exports, modules) {
-  var _ = require('underscore')
-      , Backbone = require('backbone')
-      , object = exports;
-  _.extend(object, Backbone.Events);
 
-  var eventSplitter = /\s+/;
+    var object = exports;
+    var eventSplitter = /\s+/;
+    var stack = {};
+    var console = window.console || function() {};
+    var _events = {};
 
-  var stack = {};
+    modules.exports = {
+        on: function(eventName, callback, context) {
 
-  //注册所有的事件，保留每个事件的最后状态
-  object.on('all', function(event){
-    
-    var rest = Array.prototype.slice.call(arguments, 1);
-    stack[event] = rest;
-  
-  }, object);
+            var _event = _events[eventName] || (_events[eventName] = []);
 
-  //订阅事件的最后状态
-  object.past = function(eventStr, callback, context) {
-      
-    if (!callback) return this;
-    var event, rest
-      , events = eventStr.split(eventSplitter);
-    
-    while (event = events.shift()) {
+            _event.push({
+                callback: callback,
+                context: context,
+                ctx: context || this
+            });
+            return this;
+        },
 
-    	if (rest = stack[event]) {
-        callback.apply(context || this, rest);
-    	}
+        off: function(eventName, callback, context) {
 
-    }
+            if (!eventName) {
+                return this;
+            };
 
-    this.on( eventStr, callback, context );
-  }
+            if (!callback && !context) {
 
-  //清空每个事件的最后状态
-  object.clear = function(){
+                try {
+                    delete _events[eventName];
+                } catch(e) {}
+            };
 
-    stack = {};
+            var _event = _events[eventName] || [], resetEvent = [];
 
-  }
+            for (var i = _event.length - 1; i >= 0; i--) {
+
+                if(callback !== _event.callback) {
+
+                    resetEvent.push[_event];
+                }
+            };
+
+            _event = resetEvent;
+            return this;
+        },
+
+        past: function() {},
+
+        trigger: function(eventName) {
+
+            var _event = _events[eventName] || [];
+            var args = Array.prototype.slice.call(arguments, 1);
+
+            for (var i = _event.length - 1; i >= 0; i--) {
+
+                var obj = _event[i];
+                obj.callback.apply(obj.context || obj.ctx, args);
+            };
+        },
+
+        clear: function () {
+
+        }
+    };
 
 });
