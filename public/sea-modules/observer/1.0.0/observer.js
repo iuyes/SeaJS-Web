@@ -3,6 +3,7 @@ define(function(require, exports, modules) {
     var object = exports;
     var stack = {};
     var _events = {};
+    var eventCount = {};
     var console = window.console || function() {};
 
     modules.exports = {
@@ -61,7 +62,9 @@ define(function(require, exports, modules) {
             var _event = _events[eventName] || [];
             var args = Array.prototype.slice.call(arguments, 1);
             stack[eventName] = args;
+            eventCount[eventName] = 1 + (eventCount[eventName] || 0);
 
+            console.log('observer事件触发统计列表: ', eventCount);
             console.log('%s 事件触发于: %s', eventName, debugTriggerObserver());
             for (var i = _event.length - 1; i >= 0; i--) {
 
