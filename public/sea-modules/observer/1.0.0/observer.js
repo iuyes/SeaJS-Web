@@ -12,8 +12,7 @@ define(function(require, exports, modules) {
 
             _event.push({
                 callback: callback,
-                context: context,
-                ctx: context || this,
+                context: context || this,
                 stackPath: debugTriggerObserver()
             });
             return this;
@@ -70,7 +69,7 @@ define(function(require, exports, modules) {
                 var triggerPath = obj.stackPath;
                 console.log('%s 事件订阅于: %s', eventName, triggerPath);
 
-                obj.callback.apply(obj.context || obj.ctx, args);
+                obj.callback.apply(obj.context, args);
             };
 
             return this;

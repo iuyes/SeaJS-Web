@@ -21,7 +21,7 @@ define(function(require, exports, module) {
     var ListView = Backbone.View.extend({
 
         // $el 是Backbone.View内部生成，所以正常定义el即可
-        el: $('#site-show'),
+        el: 'body',
 
         // 载入模版文件
         template: Handlebars.compile(require('../tpl/info.tpl')),

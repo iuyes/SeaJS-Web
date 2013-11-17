@@ -12,7 +12,7 @@ define(function(require, exports, module) {
         , observer = require('observer');
 
     var SearchView = Backbone.View.extend({
-        el: $('.navbar-search'),
+        el: 'body',
         initialize: function() {
         },
         events: {

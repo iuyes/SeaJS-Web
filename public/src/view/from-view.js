@@ -18,7 +18,7 @@ define(function(require, exports, module) {
     //web sql调度接口
     var FromView = Backbone.View.extend({
         // 用于事件绑定的容器
-        el: $('#web-sql'),
+        el: 'body',
         // 载入模版文件
         template: Handlebars.compile(require('../tpl/from.tpl')),
         initialize: function() {
@@ -111,13 +111,10 @@ define(function(require, exports, module) {
             this.render();
         },
         render: function() {
-            var data = this.model.toJSON();
-            data.siteType = ['雨情', '水利', '水库', '潮位', '气象'];
-            data.element = ['雨量', '水位', '库容', '潮位', '气压'];
 
-            var content = this.template(data);
-            this.$el.html(content);
-            this.renderDom(data);
+            this.$el.append('<div id="from-' + this.cid + '"></div>');
+            this.setElement('#from-' + this.cid);
+            this.renderDom();
 
             // 时间控件调用
             this.$('#setdate').datetimepicker({
@@ -125,7 +122,14 @@ define(function(require, exports, module) {
             });
         },
         // 针对页面无法用模版进行渲染的DOM元素进行单独渲染
-        renderDom: function(data) {
+        renderDom: function() {
+
+            var data = this.model.toJSON();
+            data.siteType = ['雨情', '水利', '水库', '潮位', '气象'];
+            data.element = ['雨量', '水位', '库容', '潮位', '气压'];
+
+            var content = this.template(data);
+            this.$el.html(content);
 
             // 渲染站点类型
             this.$('input[name="site-type"][value="'+ data.sitetype +'"]').attr('checked', true);

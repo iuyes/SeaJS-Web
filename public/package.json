@@ -2,7 +2,7 @@
     "name": "WebSQL",
     "version": "0.1.0",
     "root": "#",
-    "description": "",
+    "description": "websql database seajs 学习",
     "keywords":["WebSQL", "前端MVC"],
     "homepage": "",
     "author": "Nightink",
