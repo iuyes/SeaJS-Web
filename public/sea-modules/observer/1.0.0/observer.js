@@ -7,6 +7,7 @@ define(function(require, exports, modules) {
     var console = window.console || function() {};
 
     modules.exports = {
+
         on: function(eventName, callback, context) {
 
             var _event = _events[eventName] || (_events[eventName] = []);
@@ -32,11 +33,12 @@ define(function(require, exports, modules) {
                 } catch(e) {}
             };
 
-            var _event = _events[eventName] || [], resetEvent = [];
+            var _event = _events[eventName] || [];
+            var resetEvent = [];
 
             for (var i = _event.length - 1; i >= 0; i--) {
 
-                if(callback !== _event.callback) {
+                if((callback !== _event.callback) || (context !== _event.context)) {
 
                     resetEvent.push[_event];
                 }
@@ -78,8 +80,10 @@ define(function(require, exports, modules) {
             return this;
         },
 
+        // 清除trigger function最后一次状态量
         clear: function () {
 
+            stack = {};
         }
     };
 
